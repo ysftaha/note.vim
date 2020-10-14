@@ -1,1 +1,1 @@
-autocmd! BufRead,BufNewFile *.nt setfiletype nt
+autocmd! BufRead,BufNewFile *.nt setfiletype note
