@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: note
-" Filenames: *.note
+" Filenames: *.nt
 " Maintainer: Ghoyome
 " Latest Revision: 13 October 2020
 
@@ -10,7 +10,7 @@ endif
 
 """""""""""" Headings
 syn region noteHeading start="^\s*\*\s" end="$"
-hi def link noteHeading Constant
+hi def link noteHeading Type
 
 """""""""""" Inline formatting
 " bold
@@ -40,8 +40,8 @@ hi def link noteString String
 
 """""""""""" Tags & dates
 " Tag
-syntax region noteTag      start="\S\zs#\|#\S\@="       end="\s"    keepend oneline
-hi def link noteTag Type
+syntax region noteTag      start="#"       end="\ze\s"    keepend oneline
+hi def link noteTag MatchParen
 
 " date
 syntax region noteDate      start="\S\zs<\|<\S\@="       end="\S\zs>\|>\S\@="  keepend oneline
@@ -67,14 +67,14 @@ hi def link noteCheckBox Identifier
 " checklist item
 
 " checklist item done
-syn region noteCheckBoxItemDone start="^\(\s*-\s\|\s*\)\[X\]\(\s\|$\)\+" end="\(\S\+\|\s*\S\+\)\+\ze" 
-      \ contains=noteCheckBox,noteBold,noteItalic,noteString,noteUnderline,noteStrike,noteHigh,noteTag,noteDate oneline
-hi def noteCheckBoxItemDone ctermfg=Green guifg=#00FF00 cterm=STRIKETHROUGH
+syn region noteCheckBoxItemDone start="^\(\s*-\s\|\s*\)\[X\]\(\s\|$\)\+" end="\($\|\ze\s#\)" 
+      \ contains=noteCheckBox,noteTag,noteDate oneline
+hi def noteCheckBoxItemDone ctermfg=42 guifg=#FFa0a0 cterm=STRIKETHROUGH gui=STRIKETHROUGH
 
 " checklist item cancelled
-syn region noteCheckBoxItemCacelled start="^\(\s*-\s\|\s*\)\[-\]\(\s\|$\)\+" end="\(\S\+\|\s*\S\+\)\+\ze" 
-      \ contains=noteCheckBox,noteBold,noteItalic,noteString,noteUnderline,noteStrike,noteHigh,noteTag,noteDate oneline
-hi def noteCheckBoxItemCacelled ctermfg=Red guifg=#FF0000 cterm=STRIKETHROUGH
+syn region noteCheckBoxItemCacelled start="^\(\s*-\s\|\s*\)\[-\]\(\s\|$\)\+" end="\($\|\ze\s#\)" 
+      \ contains=noteCheckBox,noteTag,noteDate oneline
+hi def noteCheckBoxItemCacelled ctermfg=Red guifg=#FF0000 cterm=STRIKETHROUGH  gui=STRIKETHROUGH
 
 """""""""""" Coments
 syn keyword noteSpecial TODO FIXME REVISE RESCHEDULE EXPAND
