@@ -88,4 +88,9 @@ hi def link noteUrgent DiffDelete
 syn match noteComment "^\s*>.*" contains=noteSpecial,noteTag,noteDate,
 hi def link noteComment Comment
 
+
+call SyntaxRange#Include('```habits', '```', 'habits', 'comment')
+call SyntaxRange#Include('```py', '```', 'python', 'comment')
+call SyntaxRange#Include('```cpp', '```', 'cpp', 'comment')
+call SyntaxRange#Include('```c', '```', 'c', 'comment')
 let b:current_syntax = "note"
