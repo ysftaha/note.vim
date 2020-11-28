@@ -1,23 +1,25 @@
 " Vim syntax file
 " Language: note
 " Filenames: *.nt
-" Maintainer: Ghoyome
-" Latest Revision: 13 October 2020
+" Maintainer: ysftaha
+" Latest Revision: 28 Nov 2020
 
 if exists("b:current_syntax")
   finish
 endif
 
+syn spell   toplevel
+
 """""""""""" Headings
 syn region noteHeading start="^\s*\*\s" end="$" contains=noteSpecial
 
 """""""""""" Inline formatting
-syntax region noteBold      start="\S\zs\*\|\*\S\@="     end="\S\zs\*\|\*\S\@="  keepend oneline
-syntax region noteItalic    start="\S\zs\/\|\/\S\@="     end="\S\zs\/\|\/\S\@="  keepend oneline
-syntax region noteUnderline start="\S\zs_\|_\S\@="       end="\S\zs_\|_\S\@="    keepend oneline
-syntax region noteStrike    start="\S\zs\~\|\~\S\@="       end="\S\zs\~\|\~\S\@=" keepend oneline
-syntax region noteHigh      start="\S\zs=\|=\S\@="       end="\S\zs=\|=\S\@="    keepend oneline
-syntax region noteString      start="\S\zs`\|`\S\@="       end="\S\zs`\|`\S\@="  keepend oneline
+syntax region noteBold        start="\S\zs\*\|\*\S\@="     end="\S\zs\*\|\*\S\@="  keepend oneline
+syntax region noteItalic      start="\S\zs\/\|\/\S\@="     end="\S\zs\/\|\/\S\@="  keepend oneline
+syntax region noteUnderline   start="\S\zs_\|_\S\@="       end="\S\zs_\|_\S\@="    keepend oneline
+syntax region noteStrike      start="\S\zs\~\|\~\S\@="     end="\S\zs\~\|\~\S\@="  keepend oneline
+syntax region noteHigh        start="\S\zs=\|=\S\@="       end="\S\zs=\|=\S\@="    keepend oneline
+syntax region noteString      start="\S\zs`\|`\S\@="       end="\S\zs`\|`\S\@="    keepend oneline
 
 """""""""""" Tags & dates
 " Tag
@@ -49,20 +51,38 @@ syn region noteCheckBoxItemCacelled start="^\(\s*-\s\|\s*\)\[-\]\(\s\|$\)\+" end
       \ contains=noteCheckBox,noteTag,noteDate,noteSpecial oneline
 
 """""""""""" Coments
-syn keyword noteSpecial TODO DONE FIXME NOTE TODAY
-
-syn keyword noteDeadline DEADLINE
-
-syn keyword noteUrgent URGENT
+syn match noteSpecial "TODO\|FIXME\|DONE\|DEADLINE\|@returns\|@return\|@param\|@brief\|@note"
 
 syn match noteComment "^\s*>.*" contains=noteSpecial,noteTag,noteDate,
 
-
-call SyntaxRange#Include('habits```', '```', 'habits', 'comment')
-call SyntaxRange#Include('py```', '```', 'python', 'comment')
-call SyntaxRange#Include('cpp```', '```', 'cpp', 'comment')
-call SyntaxRange#Include('c```', '```', 'c', 'comment')
+call SyntaxRange#Include('habits```', '```', 'habits', 'Ignore')
+call SyntaxRange#Include('py```', '```', 'python', 'Ignore')
+call SyntaxRange#Include('cpp```', '```', 'cpp', 'Ignore')
+call SyntaxRange#Include('c```', '```', 'c', 'Ignore')
 let b:current_syntax = "note"
 
-" TODO
-" exec 'hi SyntasticErrorSign guifg=red ctermfg=red ' . (has("gui_running")? 'guibg=':'ctermbg=') . synIDattr(hlID('SignColumn'),'bg')
+hi def link noteHeading Title
+
+hi def noteBold      term=BOLD cterm=BOLD gui=BOLD 
+hi def noteItalic    term=ITALIC cterm=ITALIC gui=ITALIC
+hi def noteUnderline term=UNDERLINE cterm=UNDERLINE gui=UNDERLINE
+hi def noteStrike    term=STRIKETHROUGH cterm=STRIKETHROUGH gui=STRIKETHROUGH
+hi def noteHigh      cterm=REVERSE term=REVERSE gui=REVERSE
+
+if synIDtrans(hlID('diffAdded')) " check for diff legacy colors
+  hi def link noteCheckBoxItemDone     diffAdded
+  hi def link noteCheckBoxItemCacelled diffRemoved
+else 
+  hi def link noteCheckBoxItemDone     DiffAdd
+  hi def link noteCheckBoxItemCacelled DiffDelete
+endif
+
+hi def link noteTag Tag
+hi def link noteDate Keyword
+
+hi def link noteSpecial Todo
+hi def link noteComment Comment
+hi def link noteString String
+hi def link noteUlist Statement
+hi def link noteOlist Statement
+hi def link noteCheckBox Statement
