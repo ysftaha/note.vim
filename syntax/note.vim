@@ -59,7 +59,6 @@ call SyntaxRange#Include('habits```', '```', 'habits', 'Ignore')
 call SyntaxRange#Include('py```', '```', 'python', 'Ignore')
 call SyntaxRange#Include('cpp```', '```', 'cpp', 'Ignore')
 call SyntaxRange#Include('c```', '```', 'c', 'Ignore')
-let b:current_syntax = "note"
 
 hi def link noteHeading Title
 
@@ -86,3 +85,5 @@ hi def link noteString String
 hi def link noteUlist Statement
 hi def link noteOlist Statement
 hi def link noteCheckBox Statement
+
+let b:current_syntax = "note"
