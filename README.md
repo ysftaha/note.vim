@@ -18,7 +18,9 @@ highlighting which is the aim of this plugin.
     get nested code highlighting
     > c```some stuff in c``` is the syntax in the upper image, the delimiters
     > are hidden
+
 ![Different color-schemes](res/colo.png)
+
 It looks good on most themes, usually `:set termguicolors` allows for a better
 color range
 
