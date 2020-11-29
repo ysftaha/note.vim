@@ -1,4 +1,4 @@
-#note.vim
+# note.vim
 Syntax highlighting for tasks, tags, comments and many more simple 
 organizational constructs
 
@@ -10,7 +10,7 @@ and because a text file is as versatile as it gets, well except for syntax
 highlighting which is the aim of this plugin.
 
 
-#preview
+# preview
 ![Markup of highlight groups](res/close.png)
   - tags can be anywhere, even in comments
   - markup can be anywhere but in comments and headings
@@ -22,7 +22,7 @@ highlighting which is the aim of this plugin.
 It looks good on most themes, usually `:set termguicolors` allows for a better
 color range
 
-#Installation and Usage
+# Installation and Usage
 Add the following to your .vimrc, for *vim-plug* :
 
 ```sh
@@ -33,4 +33,4 @@ Or however your plugin manager handles them :)
 
 You can also clone this to your plugins directory
 
-#License
+# License
